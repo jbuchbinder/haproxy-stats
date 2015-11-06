@@ -1,6 +1,6 @@
 # HAPROXY-STATS
 
-[![Status](https://secure.travis-ci.org/jbuchbinder/haproxy-stats.png)](http://travis-ci.org/jbuchbinder/haproxy-stats)
+[![Status](https://secure.travis-ci.org/jbuchbinder/haproxy-stats.png)](http://travis-ci.org/jbuchbinder/haproxy-stats) [![Build Status](https://drone.io/github.com/jbuchbinder/haproxy-stats/status.png)](https://drone.io/github.com/jbuchbinder/haproxy-stats/latest)
 
 [haproxy](http://www.haproxy.org/) load balancer stats collector for Ganglia. Supports multiple stats sockets and Ganglia gmond collectors.
 
