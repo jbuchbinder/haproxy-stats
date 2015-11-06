@@ -36,6 +36,9 @@ func ReadStats(fp io.Reader) (Stats, error) {
 		// Otherwise, parse values
 		stat := map[string]string{}
 		segments := strings.Split(line, ",")
+		if len(segments) < 2 {
+			continue
+		}
 		name := segments[0] + "_" + segments[1]
 		for iter := 2; iter < len(segments)-1; iter++ {
 			stat[columns[iter]] = segments[iter]

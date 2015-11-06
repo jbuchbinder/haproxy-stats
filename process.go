@@ -14,6 +14,7 @@ func ProcessStats(stats []Stats, debug bool, conn []*net.UDPConn) {
 		log.Printf("ProcessStats: no stats")
 		return
 	}
+	log.Printf("ProcessStats: Aggregating from %d stats sources", len(stats))
 	for k := range stats[0] {
 		if *SkipAggregates && (strings.HasSuffix(k, "_FRONTEND") || strings.HasSuffix(k, "_BACKEND")) {
 			continue

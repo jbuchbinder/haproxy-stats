@@ -9,3 +9,19 @@
 	go get -d
 	go build
 
+## USAGE
+
+```
+Usage of ./haproxy-stats:
+  -debug
+    	Single debugging run, no loop
+  -ganglia string
+    	Gamglia gmond servers (host:port, CSV) (default "127.0.0.1:8649")
+  -interval int
+    	Poll interval in seconds (default 20)
+  -skipaggregates
+    	Skip FRONTEND/BACKEND values
+  -statsurl string
+    	Stats URLs or TCP addresses (CSV) (default "http://localhost:60081/")
+```
+

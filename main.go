@@ -12,7 +12,7 @@ import (
 
 var (
 	SkipAggregates = flag.Bool("skipaggregates", false, "Skip FRONTEND/BACKEND values")
-	StatsUrls      = flag.String("statsurl", "http://localhost:60081/", "Stats URL, ending with a slash (CSV)")
+	StatsUrls      = flag.String("statsurl", "http://localhost:60081/", "Stats URLs or TCP addresses (CSV)")
 	GmondServers   = flag.String("ganglia", "127.0.0.1:8649", "Gamglia gmond servers (host:port, CSV)")
 	Debug          = flag.Bool("debug", false, "Single debugging run, no loop")
 	Interval       = flag.Int("interval", 20, "Poll interval in seconds")
