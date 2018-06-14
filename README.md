@@ -1,6 +1,6 @@
 # HAPROXY-STATS
 
-[![Status](https://secure.travis-ci.org/jbuchbinder/haproxy-stats.png)](http://travis-ci.org/jbuchbinder/haproxy-stats) [![Build Status](https://drone.io/github.com/jbuchbinder/haproxy-stats/status.png)](https://drone.io/github.com/jbuchbinder/haproxy-stats/latest)
+[![Status](https://secure.travis-ci.org/jbuchbinder/haproxy-stats.png)](http://travis-ci.org/jbuchbinder/haproxy-stats) [![Build Status](https://drone.io/github.com/jbuchbinder/haproxy-stats/status.png)](https://drone.io/github.com/jbuchbinder/haproxy-stats/latest) [![Report Card](https://goreportcard.com/badge/github.com/jbuchbinder/haproxy-stats)](https://goreportcard.com/report/github.com/jbuchbinder/haproxy-stats)
 
 Download from drone.io : https://drone.io/github.com/jbuchbinder/haproxy-stats/files
 
