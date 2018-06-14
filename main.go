@@ -11,31 +11,31 @@ import (
 )
 
 var (
-	SkipAggregates = flag.Bool("skipaggregates", false, "Skip FRONTEND/BACKEND values")
-	StatsUrls      = flag.String("statsurl", "http://localhost:60081/", "Stats URLs or TCP addresses (CSV)")
-	GmondServers   = flag.String("ganglia", "127.0.0.1:8649", "Gamglia gmond servers (host:port, CSV)")
-	Debug          = flag.Bool("debug", false, "Single debugging run, no loop")
-	Interval       = flag.Int("interval", 20, "Poll interval in seconds")
+	skipAggregates = flag.Bool("skipaggregates", false, "Skip FRONTEND/BACKEND values")
+	statsUrls      = flag.String("statsurl", "http://localhost:60081/", "Stats URLs or TCP addresses (CSV)")
+	gmondServers   = flag.String("ganglia", "127.0.0.1:8649", "Gamglia gmond servers (host:port, CSV)")
+	debug          = flag.Bool("debug", false, "Single debugging run, no loop")
+	interval       = flag.Int("interval", 20, "Poll interval in seconds")
 
 	gm *gmetric.Gmetric
 )
 
 func main() {
 	flag.Parse()
-	if *Debug {
-		stats, err := GetStats()
+	if *debug {
+		stats, err := getStats()
 		if err != nil {
 			panic(err)
 		}
 		log.Printf("%v\n", stats)
-		ProcessStats(stats, true, nil)
+		processStats(stats, true, nil)
 		return
 	}
 
 	log.Print("main(): Spinning up gmetric connection(s)")
 	gm = &gmetric.Gmetric{}
 
-	servers := strings.Split(*GmondServers, ",")
+	servers := strings.Split(*gmondServers, ",")
 	for i := range servers {
 		parts := strings.Split(servers[i], ":")
 		port, err := strconv.ParseUint(parts[1], 10, 64)
@@ -49,16 +49,16 @@ func main() {
 
 	log.Print("main(): Entering loop")
 	for {
-		stats, err := GetStats()
+		stats, err := getStats()
 		if err != nil {
 			log.Printf("Error: %v", err)
 		} else {
 			log.Printf("Fetched %d stats\n", len(stats))
 			conn := gm.OpenConnections()
-			ProcessStats(stats, false, conn)
+			processStats(stats, false, conn)
 			gm.CloseConnections(conn)
 		}
-		log.Printf("Going dormant for %d seconds", *Interval)
-		time.Sleep(time.Duration(*Interval) * time.Second)
+		log.Printf("Going dormant for %d seconds", *interval)
+		time.Sleep(time.Duration(*interval) * time.Second)
 	}
 }

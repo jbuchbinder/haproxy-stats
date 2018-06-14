@@ -7,13 +7,13 @@ import (
 	"strings"
 )
 
-type Stat map[string]string
-type Stats map[string]Stat
+type stat map[string]string
+type stats map[string]stat
 
-func ReadStats(fp io.Reader) (Stats, error) {
-	log.Print("ReadStats()\n")
+func readStats(fp io.Reader) (stats, error) {
+	log.Print("readStats()\n")
 
-	stats := map[string]Stat{}
+	mystats := map[string]stat{}
 	var columns []string
 
 	scanner := bufio.NewScanner(fp)
@@ -34,25 +34,25 @@ func ReadStats(fp io.Reader) (Stats, error) {
 		}
 
 		// Otherwise, parse values
-		stat := map[string]string{}
+		mystat := map[string]string{}
 		segments := strings.Split(line, ",")
 		if len(segments) < 2 {
 			continue
 		}
 		name := segments[0] + "_" + segments[1]
 		for iter := 2; iter < len(segments)-1; iter++ {
-			stat[columns[iter]] = segments[iter]
+			mystat[columns[iter]] = segments[iter]
 		}
-		log.Printf("[%s] Found %d values : %v\n", name, len(stat), stat)
+		log.Printf("[%s] Found %d values : %v\n", name, len(mystat), mystat)
 
 		// Pass back values
-		stats[name] = stat
+		mystats[name] = mystat
 	}
 
 	if err := scanner.Err(); err != nil {
 		log.Printf(err.Error())
-		return stats, err
+		return mystats, err
 	}
 
-	return stats, nil
+	return mystats, nil
 }

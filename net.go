@@ -7,43 +7,43 @@ import (
 	"strings"
 )
 
-func GetStats() ([]Stats, error) {
-	stats := make([]Stats, 0)
+func getStats() ([]stats, error) {
+	mystats := make([]stats, 0)
 
-	urls := strings.Split(*StatsUrls, ",")
+	urls := strings.Split(*statsUrls, ",")
 
 	for iter := 0; iter < len(urls); iter++ {
-		s, e := ReadSingleStats(urls[iter])
+		s, e := readSingleStats(urls[iter])
 		if e == nil {
-			stats = append(stats, s)
+			mystats = append(mystats, s)
 		}
 	}
 
-	return stats, nil
+	return mystats, nil
 }
 
-func ReadSingleStats(url string) (Stats, error) {
-	var stats Stats
+func readSingleStats(url string) (stats, error) {
+	var mystats stats
 
 	// For http urls, use standard GET requests
 	if strings.HasPrefix(url, "http") {
 		resp, err := http.Get(url + ";csv")
 		if err != nil {
-			return stats, err
+			return mystats, err
 		}
 		defer resp.Body.Close()
-		return ReadStats(resp.Body)
+		return readStats(resp.Body)
 	}
 
 	// Use TCP collection instead
 	conn, err := net.Dial("tcp", url)
 	if err != nil {
-		return stats, err
+		return mystats, err
 	}
 	defer func() {
 		fmt.Fprintf(conn, "quit\n")
 		conn.Close()
 	}()
 	_, err = fmt.Fprintf(conn, "show stat\n")
-	return ReadStats(conn)
+	return readStats(conn)
 }
