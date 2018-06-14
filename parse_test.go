@@ -11,7 +11,7 @@ func TestTimeConsuming(t *testing.T) {
 		t.Error(err)
 	}
 	defer fp.Close()
-	stats, err := ReadStats(fp)
+	stats, err := readStats(fp)
 	if err != nil {
 		t.Error(err)
 	}
