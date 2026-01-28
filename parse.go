@@ -50,7 +50,7 @@ func readStats(fp io.Reader) (stats, error) {
 	}
 
 	if err := scanner.Err(); err != nil {
-		log.Printf(err.Error())
+		log.Printf("ERR: %s", err.Error())
 		return mystats, err
 	}
 

@@ -19,6 +19,3 @@ func TestTimeConsuming(t *testing.T) {
 		t.Errorf("Found %s for stot, expected 625019", stats["fe_production_web_http_FRONTEND"]["stot"])
 	}
 }
-
-func test() {
-}

@@ -12,7 +12,7 @@ func getStats() ([]stats, error) {
 
 	urls := strings.Split(*statsUrls, ",")
 
-	for iter := 0; iter < len(urls); iter++ {
+	for iter := range urls {
 		s, e := readSingleStats(urls[iter])
 		if e == nil {
 			mystats = append(mystats, s)
@@ -36,7 +36,8 @@ func readSingleStats(url string) (stats, error) {
 	}
 
 	// Use TCP collection instead
-	conn, err := net.Dial("tcp", url)
+	d := net.Dialer{Timeout: *timeout}
+	conn, err := d.Dial("tcp", url)
 	if err != nil {
 		return mystats, err
 	}
